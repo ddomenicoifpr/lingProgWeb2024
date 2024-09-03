@@ -33,5 +33,4 @@ class Conexao {
         return self::$conn;
     }
 
-
 }

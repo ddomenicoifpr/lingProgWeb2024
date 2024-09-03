@@ -6,7 +6,23 @@ error_reporting(E_ALL);
 include_once("conexao.php");
 
 $conn = Conexao::getConexao();
-print_r($conn);
+//Teste de conexão... deve aparecer PDO Object()
+//print_r($conn);
+
+//Verifica se o usuário já clicou no gravar
+if(isset($_POST['titulo'])) {
+    $titulo = $_POST['titulo'];
+    $genero = $_POST['genero'];
+    $qtdPaginas = $_POST['qtdPaginas'];
+
+    $sql = "INSERT INTO livros (titulo, genero, qtd_paginas)
+            VALUES (?, ?, ?)";
+    $stm = $conn->prepare($sql);
+    $stm->execute([$titulo, $genero, $qtdPaginas]);  
+    
+    //Redirecionar para a página desejada
+    header("location: livro.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +35,7 @@ print_r($conn);
 <body>
 
     <h3>Formulário do livro</h3>
-    <form method="POST">
+    <form method="POST" >
 
         <input type="text" name="titulo"
             placeholder="Informe o título" />
@@ -47,6 +63,35 @@ print_r($conn);
     </form>
 
     <h3>Listagem dos livros</h3>
+
+    <?php
+        $sql = "SELECT * FROM livros";
+        $stm = $conn->prepare($sql);
+        $stm->execute();
+        $livros = $stm->fetchAll();
+    ?>
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Gênero</th>
+            <th>Páginas</th>
+            <th></th>
+        </tr>
+
+        <?php foreach($livros as $l): ?>
+            <tr>
+                <td><?php echo $l["id"]; ?></td>
+                <td><?php echo $l["titulo"]; ?></td>
+                <td><?php echo $l["genero"]; ?></td>
+                <td><?= $l["qtd_paginas"]; ?></td>
+                <td>
+                    <a href="livro_del.php?id=<?= $l['id'] ?>">Excluir</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
     
 </body>
 </html>
