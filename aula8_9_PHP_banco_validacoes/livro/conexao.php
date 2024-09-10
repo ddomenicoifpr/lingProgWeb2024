@@ -23,7 +23,7 @@ class Conexao {
 
             try {
                 self::$conn = new PDO($endereco, $usuario, 
-                                    $senha, $opcoes);
+                                        $senha, $opcoes);
             } catch(PDOException $e) {
                 echo "Erro ao conectar no banco de dados!<br>";
                 echo $e->getMessage();
