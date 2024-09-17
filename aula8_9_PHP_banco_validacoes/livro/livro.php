@@ -11,6 +11,10 @@ $conn = Conexao::getConexao();
 
 $msgErro = "";
 
+$titulo = "";
+$qtdPaginas = "";
+$genero = "";
+
 //Verifica se o usuário já clicou no gravar
 if(isset($_POST['titulo'])) {
     $titulo = $_POST['titulo'];
@@ -18,16 +22,17 @@ if(isset($_POST['titulo'])) {
     $qtdPaginas = $_POST['qtdPaginas'];
 
     //Validar os dados
-    if($titulo == '') {
-        $msgErro = "Informe o título do livro!";
+    $erros = array();
+    if($titulo == '')
+        array_push($erros, "Informe o título do livro!");
     
-    } else if($genero == '') {
-        $msgErro = "Informe o gênero do livro!";
+    if($genero == '')
+        array_push($erros, "Informe o gênero do livro!");
     
-    } else if($qtdPaginas == '') {
-        $msgErro = "Informe a quantidade de páginas do livro!";
+    if($qtdPaginas == '')
+        array_push($erros, "Informe a quantidade de páginas do livro!");
     
-    } else {
+    if(empty($erros)) {
         //Se todas as validações foram atendidas, insere o livro na base de dados
         $sql = "INSERT INTO livros (titulo, genero, qtd_paginas)
                 VALUES (?, ?, ?)";
@@ -36,7 +41,8 @@ if(isset($_POST['titulo'])) {
         
         //Redirecionar para a página desejada
         header("location: livro.php");
-    }
+    } else
+        $msgErro = implode("<br>", $erros);
 }
 ?>
 
@@ -54,23 +60,25 @@ if(isset($_POST['titulo'])) {
     <form method="POST" >
 
         <input type="text" name="titulo" id="titulo"
-            placeholder="Informe o título" />
+            placeholder="Informe o título" 
+            value="<?php echo $titulo; ?>" />
 
         <br><br>
 
         <select name="genero" id="genero">
             <option value="">---Selecione o gênero---</option>
-            <option value="A">Aventura</option>
-            <option value="D">Drama</option>
-            <option value="F">Ficção</option>
-            <option value="R">Romance</option>
-            <option value="O">Outro</option>
+            <option value="A" <?= ($genero == 'A' ? 'selected' : '') ?> >Aventura</option>
+            <option value="D" <?= ($genero == 'D' ? 'selected' : '') ?> >Drama</option>
+            <option value="F" <?= ($genero == 'F' ? 'selected' : '') ?> >Ficção</option>
+            <option value="R" <?= ($genero == 'R' ? 'selected' : '') ?> >Romance</option>
+            <option value="O" <?= ($genero == 'O' ? 'selected' : '') ?> >Outro</option>
         </select>
 
         <br><br>
 
         <input type="number" name="qtdPaginas" id="qtdPaginas"
-            placeholder="Informe a quantidade de páginas" />
+            placeholder="Informe a quantidade de páginas"
+            value="<?= $qtdPaginas ?>" />
 
         <br><br>
 
