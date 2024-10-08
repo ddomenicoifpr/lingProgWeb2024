@@ -11,8 +11,7 @@ include_once(__DIR__ . "/../../controller/AlunoController.php");
 
 $alunoCont = new AlunoController();
 $alunos = $alunoCont->listar();
-print_r($alunos);
-
+//print_r($alunos);
 
 //Inclusão do HTML do header
 include_once(__DIR__ . "/../include/header.php");
@@ -30,6 +29,15 @@ include_once(__DIR__ . "/../include/header.php");
     </tr> 
 
     <!-- Dados da tabela -->
+    <?php foreach($alunos as $a): ?> 
+        <tr>
+            <td><?= $a->getId(); ?></td>
+            <td><?= $a->getNome(); ?></td>
+            <td><?= $a->getIdade(); ?></td>
+            <td><?= $a->getEstrangeiroTexto(); ?></td>
+            <td><?= $a->getCurso(); ?></td>
+        </tr>
+    <?php endforeach; ?> 
 
 </table>
 
