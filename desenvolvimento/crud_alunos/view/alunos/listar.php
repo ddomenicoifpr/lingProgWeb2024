@@ -18,6 +18,8 @@ include_once(__DIR__ . "/../include/header.php");
 ?>
 <h2>Listagem de Alunos</h2>
 
+<a href="inserir.php">Inserir</a>
+
 <table border="1">
     <!-- Cabeçalho da tabela -->
     <tr>
