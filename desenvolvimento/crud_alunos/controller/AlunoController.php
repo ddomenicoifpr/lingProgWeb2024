@@ -11,4 +11,16 @@ class AlunoController {
         return $alunos;
     }
 
+    public function inserir($aluno) {
+        $alunoDao = new AlunoDao();
+
+        $alunoDao->insert($aluno);
+    }
+
+    public function excluir($id) {
+        $alunoDao = new AlunoDao();
+
+        $alunoDao->delete($id);
+    }
+
 }

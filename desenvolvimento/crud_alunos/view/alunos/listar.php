@@ -28,6 +28,7 @@ include_once(__DIR__ . "/../include/header.php");
         <th>Idade</th>
         <th>Estrangeiro</th>
         <th>Curso</th>
+        <th></th>
     </tr> 
 
     <!-- Dados da tabela -->
@@ -38,6 +39,12 @@ include_once(__DIR__ . "/../include/header.php");
             <td><?= $a->getIdade(); ?></td>
             <td><?= $a->getEstrangeiroTexto(); ?></td>
             <td><?= $a->getCurso(); ?></td>
+            <td>
+                <a href="excluir.php?id=<?= $a->getId(); ?>"
+                    onclick="return confirm('Confirma a exclusão do aluno?');">
+                    <img src="../../img/btn_excluir.png">
+                </a>
+            </td>
         </tr>
     <?php endforeach; ?> 
 
