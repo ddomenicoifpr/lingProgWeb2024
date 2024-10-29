@@ -10,7 +10,7 @@ if($id) {
     //2- Chamar o AlunoController para excluir o aluno pelo ID 
     //Excluir
     $alunoCont = new AlunoController();
-    $erros = $alunoCont->excluir($id);
+    $alunoCont->excluir($id);
     
     //3- Voltar para o listar.php
     header("location: listar.php");

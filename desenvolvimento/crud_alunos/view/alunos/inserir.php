@@ -4,6 +4,9 @@ include_once(__DIR__ . "/../../model/Aluno.php");
 include_once(__DIR__ . "/../../model/Curso.php");
 include_once(__DIR__ . "/../../controller/AlunoController.php");
 
+$msgErro = "";
+$aluno = null;
+
 if(isset($_POST['nome'])) {
     //Capturando os dados do formulário
     $nome = trim($_POST['nome']) ? trim($_POST['nome']) : null;
@@ -17,21 +20,27 @@ if(isset($_POST['nome'])) {
     $aluno->setIdade($idade);
     $aluno->setEstrangeiro($estrang);
 
-    $cursoObj = new Curso();
-    $cursoObj->setId($curso);
-    $aluno->setCurso($cursoObj);
+    if($curso) {
+        $cursoObj = new Curso();
+        $cursoObj->setId($curso);
+        $aluno->setCurso($cursoObj);
+    } else
+        $aluno->setCurso(null);
 
     //print_r($aluno);
 
     //Chamando a rotina do controller para inserir o aluno
     $alunoCont = new AlunoController();
-    $alunoCont->inserir($aluno);
+    $erros = $alunoCont->inserir($aluno);
 
-    //Redirecionando para a listagem
-    header("location: listar.php");
-} else
-    echo "Usuário ainda não clicou em gravar";
+    if(count($erros) <= 0) {
+        //Redirecionando para a listagem
+        header("location: listar.php");
+    } else {
+        $msgErro = implode("<br>", $erros);
+        //echo $msgErro;
+    }
+} 
 
 
 include("form.php");
-
