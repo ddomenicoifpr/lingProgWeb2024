@@ -12,6 +12,13 @@ class AlunoController {
         return $alunos;
     }
 
+    public function buscarPorId($idAluno) {
+        $alunoDao = new AlunoDao();
+
+        $aluno = $alunoDao->findById($idAluno);
+        return $aluno;
+    }
+
     public function inserir($aluno) {
         $alunoService = new AlunoService();
         $erros = $alunoService->validarDados($aluno);
@@ -21,6 +28,18 @@ class AlunoController {
 
         $alunoDao = new AlunoDao();
         $alunoDao->insert($aluno);
+        return array();
+    }
+
+    public function alterar($aluno) {
+        $alunoService = new AlunoService();
+        $erros = $alunoService->validarDados($aluno);
+
+        if(count($erros) > 0)
+            return $erros;
+
+        $alunoDao = new AlunoDao();
+        $alunoDao->update($aluno);
         return array();
     }
 
