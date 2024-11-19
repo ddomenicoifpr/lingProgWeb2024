@@ -16,11 +16,12 @@ $alunos = $alunoCont->listar();
 //Inclusão do HTML do header
 include_once(__DIR__ . "/../include/header.php");
 ?>
+
 <h2>Listagem de Alunos</h2>
 
-<a href="inserir.php">Inserir</a>
+<a href="inserir.php" class="btn btn-primary btn-sm">Inserir</a>
 
-<table border="1">
+<table class="table table-striped table-bordered mt-2">
     <!-- Cabeçalho da tabela -->
     <tr>
         <th>ID</th>
