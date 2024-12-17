@@ -1,7 +1,28 @@
 <?php
 #Página com o formulário de login
 
+include_once(__DIR__ . "/../../controller/UsuarioController.php");
+
 $msgErro = "";
+$login = "";
+$senha = "";
+
+if(isset($_POST['login'])) { //Usuário já clicou no Logar
+    $login = trim($_POST['login']);
+    $senha = $_POST['senha'];
+
+    $usuCont = new UsuarioController();
+    $erros = $usuCont->logar($login, $senha);
+
+    if(! $erros) {
+        header("location: " . BASE_URL);
+        exit;
+    }
+
+    //print_r($erros);
+    $msgErro = implode("<br>", $erros);
+}
+
 
 //Inclusão do HTML do header
 include_once(__DIR__ . "/../include/header.php");
@@ -19,13 +40,13 @@ include_once(__DIR__ . "/../include/header.php");
                 <div>
                     <label class="form-label" for="txtLogin">Login:</label>
                     <input class="form-control" type="text" id="txtLogin" name="login"
-                        maxlength="15" />
+                        maxlength="15" value="<?= $login ?>" />
                 </div>
 
                 <div>
                     <label class="form-label" for="txtSenha">Senha:</label>
                     <input class="form-control" type="password" id="txtSenha" name="senha"
-                        maxlength="15" />
+                        maxlength="15" value="<?= $senha ?>" />
                 </div>
 
                 <div class="mt-3">

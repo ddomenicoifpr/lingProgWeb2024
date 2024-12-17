@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . "/../dao/UsuarioDAO.php");
+require_once(__DIR__ . "/../dao/UsuarioDao.php");
 require_once(__DIR__ . "/../service/UsuarioService.php");
 
 class UsuarioController {
@@ -19,10 +19,21 @@ class UsuarioController {
         if(! empty($erros))
             return $erros;
 
-        //TODO - Implementar validação de login
+        //Implementar validação de login
+        $usuario = $this->usuarioDAO->findByLoginSenha($login, $senha);
+        if(! $usuario) {
+            return array("Login ou senha inválidos!");       
+        }
+
+        //Salvar o usuário na sessão
+        $this->usuarioService->salvarUsuarioSessao($usuario);
         
         //Retorna um array vazio para indicar que tudo deu certo
         return array();
+    }
+
+    public function deslogar() {
+        $this->usuarioService->removerSessao();
     }
 
 }

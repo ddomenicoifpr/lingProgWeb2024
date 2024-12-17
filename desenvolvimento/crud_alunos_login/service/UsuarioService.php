@@ -2,6 +2,7 @@
 #Arquivo com a declaração da classe service para Usuario
 
 include_once(__DIR__ . "/../model/Usuario.php");
+include_once(__DIR__ . "/../util/config.php");
 
 class UsuarioService {
 
@@ -17,6 +18,18 @@ class UsuarioService {
             array_push($erros, "O campo [Senha] é obrigatório.");
 
         return $erros;
+    }
+
+    public function salvarUsuarioSessao(Usuario $usuario) {
+        session_start();
+        $_SESSION[SESSAO_USUARIO_ID] = $usuario->getId();
+        $_SESSION[SESSAO_USUARIO_NOME] = $usuario->getNome();
+    }
+
+    public function removerSessao() {
+        session_start();
+        session_unset();
+        session_destroy();
     }
 
 }

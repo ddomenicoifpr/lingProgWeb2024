@@ -1,3 +1,6 @@
+<?php
+    include_once(__DIR__ . "/../../util/config.php");
+?>
 <!doctype html>
 <html lang="pt">
 
