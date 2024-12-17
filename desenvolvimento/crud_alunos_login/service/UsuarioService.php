@@ -32,4 +32,21 @@ class UsuarioService {
         session_destroy();
     }
 
+    public function usuarioExisteSessao() {
+        if(session_status() != PHP_SESSION_ACTIVE)
+            session_start();
+        
+        if(isset($_SESSION[SESSAO_USUARIO_ID]))
+            return true;
+
+        return false;
+    }
+
+    public function getNomeUsuarioLogado() {
+        if($this->usuarioExisteSessao())
+            return $_SESSION[SESSAO_USUARIO_NOME];
+
+        return null;
+    }
+
 }

@@ -1,10 +1,6 @@
-<?php 
-//Teste de conexão com a base de dados
-/*
-include_once(__DIR__ . "/../../util/Connection.php");
-$conn = Connection::getConnection();
-print_r($conn);
-*/
+<?php
+//Inclui a página que valida se o usuário está logado
+include_once(__DIR__ . "/../login/login_verifica.php");
 
 //Carregando a lista de alunos
 include_once(__DIR__ . "/../../controller/AlunoController.php");
@@ -15,6 +11,9 @@ $alunos = $alunoCont->listar();
 
 //Inclusão do HTML do header
 include_once(__DIR__ . "/../include/header.php");
+
+//Inclusão do Menu
+include_once(__DIR__ . "/../include/menu.php");
 ?>
 
 <h2>Listagem de Alunos</h2>

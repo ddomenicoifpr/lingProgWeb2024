@@ -1,4 +1,6 @@
 <?php
+//Inclui a página que valida se o usuário está logado
+include_once(__DIR__ . "/../login/login_verifica.php");
 
 //Buscar os cursos para exibir no select
 include_once(__DIR__ . "/../../controller/CursoController.php");
@@ -8,6 +10,9 @@ $cursos = $cursoCont->listar();
 
 
 include_once(__DIR__ . "/../include/header.php");
+
+//Inclusão do Menu
+include_once(__DIR__ . "/../include/menu.php");
 ?>
 
 <h3>Cadastrar aluno</h3>

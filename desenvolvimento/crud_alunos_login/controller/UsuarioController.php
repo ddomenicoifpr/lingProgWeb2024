@@ -36,4 +36,12 @@ class UsuarioController {
         $this->usuarioService->removerSessao();
     }
 
+    public function estaLogado() {
+        return $this->usuarioService->usuarioExisteSessao();
+    }
+
+    public function getNomeUsuarioLogado() {
+        return $this->usuarioService->getNomeUsuarioLogado();
+    }
+
 }

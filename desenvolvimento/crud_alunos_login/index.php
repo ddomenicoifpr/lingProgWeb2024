@@ -1,7 +1,12 @@
 <?php
+//Inclui a página que valida se o usuário está logado
+include_once(__DIR__ . "/view/login/login_verifica.php");
 
 //Inclusão do HTML do header
 include_once(__DIR__ . "/view/include/header.php");
+
+//Inclusão do Menu
+include_once(__DIR__ . "/view/include/menu.php");
 ?>
 
 <div class="row mt-3 justify-content-center">

@@ -1,5 +1,5 @@
 <?php
-    include_once(__DIR__ . "/../../util/config.php");
+include_once(__DIR__ . "/../../util/config.php");
 ?>
 <!doctype html>
 <html lang="pt">
@@ -15,3 +15,4 @@
 
     <!-- Container bootstrap -->
     <div class="container">
+
