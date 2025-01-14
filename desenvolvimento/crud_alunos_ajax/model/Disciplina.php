@@ -3,12 +3,18 @@
 
 require_once(__DIR__ . "/Curso.php");
 
-class Disciplina {
+class Disciplina implements JsonSerializable {
 
     private int $id;
     private ?string $codigo;
     private ?string $nome;
     private ?Curso $curso;
+
+    public function jsonSerialize(): array {
+        return array("id" => $this->id,
+                     "codigo" => $this->codigo,
+                     "nome" => $this->nome);
+    }
 
     public function __construct($id=0) {
         $this->id = $id;
