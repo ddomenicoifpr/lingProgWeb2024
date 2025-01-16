@@ -12,6 +12,6 @@ $discCont = new DisciplinaController();
 $disciplinas = $discCont->listarPorCurso($id);
 
 //print_r($disciplinas);
-echo json_encode($disciplinas, JSON_PRETTY_PRINT);
+echo json_encode($disciplinas, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 
 //listar_por_curso.php?id=3
