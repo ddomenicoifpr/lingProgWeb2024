@@ -55,6 +55,9 @@ $cursos = $cursoCont->listar();
                 value="<?php echo ($turma ? $turma->getId() : 0); ?>" />
 
             <button type="submit" class="btn btn-success mt-3">Gravar</button>
+            <button type="button" class="btn btn-warning mt-3"
+                    onclick="salvarTurma()">
+                Gravar AJAX</button>
         </form>
     </div>
 

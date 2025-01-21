@@ -2,6 +2,8 @@
 
 include_once(__DIR__ . "/../../controller/DisciplinaController.php");
 
+//sleep(3);
+
 //Receber o id do curso por método GET
 $id = 0;
 if(isset($_GET['id']))
