@@ -106,7 +106,14 @@ function salvarTurma() {
     //Função que vai ser executada quando chegar as resposta
     xhttp.onload = function() {
         var resposta = xhttp.responseText;
-        console.log(resposta);
+        if(resposta) {
+            //Capturar os erros
+            var divErro = document.getElementById("divMsgErro");
+            divErro.innerHTML = resposta;
+            divErro.style.display = "block";
+        } else 
+            //Volta para a listagem pois inseriu a turma
+            window.location = "listar.php"; 
     }
 
     //Enviar a requisição

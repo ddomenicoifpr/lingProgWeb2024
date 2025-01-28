@@ -1,6 +1,7 @@
 <?php
 
 include_once(__DIR__ . "/../../model/Turma.php");
+include_once(__DIR__ . "/../../controller/TurmaController.php");
 
 $ano = is_numeric($_POST["ano"]) ? $_POST["ano"] : null;
 $idCurso = is_numeric($_POST["idCurso"]) ? $_POST["idCurso"] : null;
@@ -18,6 +19,13 @@ $turma->setAno($ano);
 $disc = new Disciplina($idDisciplina);
 $turma->setDisciplina($disc);
 
-print_r($turma);
+//print_r($turma);
 
 //Chamar o controller para inserir a turma
+$turmaCont = new TurmaController();
+$erros = $turmaCont->salvar($turma);
+
+if($erros)
+    echo implode("<br>", $erros);
+else 
+    echo "";

@@ -17,7 +17,7 @@ class TurmaService {
             array_push($erros, "O campo [Ano] deve ser maior que 2000.");
 
         //Validar disciplina
-        if(! $turma->getDisciplina())
+        if(! $turma->getDisciplina() || ! $turma->getDisciplina()->getId())
             array_push($erros, "O campo [Disciplina] é obrigatório.");
 
         return $erros;
